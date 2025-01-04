@@ -70,6 +70,8 @@ class detayKontrol extends AdminController
         return $show;
     }
 
+
+
     /**
      * Make a form builder.
      *

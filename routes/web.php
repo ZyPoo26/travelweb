@@ -1,6 +1,7 @@
 <?php
 
-use App\Admin\Controllers\cartKontrol;
+use App\Admin\Controllers\cart1Kontrol;
+
 use App\Admin\Controllers\mainuserKontrol;
 use App\Admin\Controllers\myprofilKontrol;
 use Illuminate\Support\Facades\Route;
@@ -39,14 +40,16 @@ Route::get('/liste',function(){
     Route::get('/shop',function(){
         $shop = DB::table('shop')->get();return view('shop', ['shop' => $shop]);});
 
+        Route::get('/cart', [cart1Kontrol::class, 'viewCart'])->name('cart');
+
+
 
         Route::get('/myprofil', function () {
             return view('myprofil');  // myprofil sayfasını render et
         })->name('myprofil');
 
-        Route::post('cart/add', [cartKontrol::class, 'addToCart'])->name('cart.add');
-        Route::get('cart', [cartKontrol::class, 'viewCart'])->name('cart.index');
-        Route::delete('cart/remove/{cartId}', [cartKontrol::class, 'removeFromCart'])->name('cart.remove');
+
+
 
 
 
@@ -70,7 +73,8 @@ Route::get('/liste',function(){
         Route::post('/register', [mainuserKontrol::class, 'register'])->name(name: 'register');
         Route::post('/logout', [mainuserKontrol::class, 'logout'])->name('logout');
         Route::post('/updateProfile', [myprofilKontrol::class, 'updateProfile'])->name('updateProfile');
-        Route::post('/update-profile-picture', [myprofilKontrol::class, 'updateProfilePicture'])->name('updateProfilePicture');
+        Route::post('/cart.add', [cart1Kontrol::class, 'cart1kontrol'])->name('cart.add');
+        Route::delete('/cart.remove', [cart1Kontrol::class, 'removeFromCart'])->name('cart.remove');
 
 
 

@@ -177,28 +177,32 @@
 							<ul>
 								<li>
 									<i><img src="images/icons/icon-01.png" alt="image destinations"></i>
-									<span>1-800-321-6543</span>
+									<span>506 175 08 38</span>
 								</li>
 								<li>
 									<i><img src="images/icons/icon-02.png" alt="image destinations"></i>
-									<span>CHOOSE YOUR EXPERIENCE <a href="javascript:void(0);">Discover more</a></span>
+									<span>Senin Seçeneklerinin <a href="liste">Daha Fazlasını Keşfet</a></span>
 								</li>
 							</ul>
 						</nav>
 						<div class="tg-addnavcartsearch">
 							<nav class="tg-addnav">
 								<ul>
-									<li><a href="javascript:void(0);">about</a></li>
-									<li><a href="javascript:void(0);">contact</a></li>
+									<li><a href="aboutus.html">Hakkımızda</a></li>
+									<li><a href="contactus.html">İletişime Geç</a></li>
 								</ul>
 							</nav>
 							<nav class="tg-cartsearch">
 								<ul>
 									<li>
-										<a href="javascript:void(0);"><img src="images/icons/icon-03.png" alt="image destinations"></a>
-										<div class="tg-cartitems">
+                                         <a href="{{ url('cart') }}">
+                                            <img src="images/icons/icon-03.png" alt="Sepet">
+                                         </a>
+
+
+										{{-- <div class="tg-cartitems">
 											<div class="tg-cartlistitems">
-												<h3>Shopping Cart</h3>
+												<h3>Alışveriş Sepeti</h3>
 												<div class="tg-cartitem">
 													<figure class="tg-itemimg"><img src="images/products/img-11.jpg" alt="image description"></figure>
 													<div class="tg-contentbox">
@@ -220,14 +224,14 @@
 													</div>
 												</div>
 												<div class="tg-subtotal">
-													<h2>Subtotal</h2>
+													<h2>Toplam</h2>
 													<span>$830</span>
 												</div>
 											</div>
 											<div class="tg-btnarea">
-												<a class="tg-btn" href="#"><span>view cart</span></a>
+												<a class="tg-btn" href="#"><span>Kart İle Öde</span></a>
 											</div>
-										</div>
+										</div> --}}
 									</li>
 									<li><a href="#tg-search"><img src="images/icons/icon-04.png" alt="image destinations"></a></li>
 								</ul>
@@ -235,7 +239,7 @@
 						</div>
 					</div>
 					<div class="tg-navigationarea tg-headerfixed">
-						<strong class="tg-logo"><a href="index.html"><img src="images/logo.png" alt="company logo here"></a></strong>
+						<strong class="tg-logo"><a href="tur"><img src="images/logo.png" alt="company logo here"></a></strong>
 						<div class="tg-socialsignin">
 							<ul class="tg-socialicons">
 								<li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
@@ -280,30 +284,13 @@
 							</div>
 							<div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
 								<ul>
-									<li class="menu-item-has-children">
-										<a href="javascript:void(0);">Home</a>
-										<ul class="sub-menu">
-											<li><a href="index.html">Home ~ Modern</a></li>
-											<li><a href="indexv2.html">Home ~ Full Screen</a></li>
-											<li><a href="indexv3.html">Home ~ Creative</a></li>
-											<li><a href="indexv4.html">Home ~ Simple</a></li>
-											<li><a href="indexv5.html">Home ~ Video</a></li>
-										</ul>
+									<li><a href="tur">Anasayfa</a>
 									</li>
-									<li><a href="destinations.html">destinations</a></li>
-									<li class="menu-item-has-children menu-item-has-mega-menu">
-										<a href="javascript:void(0);">listings</a>
+									<li><a href="iller">İller</a></li>
+									<li><a href="liste">Listeler</a>
 										<div class="mega-menu">
-											<ul>
-												<li><a href="listingvone.html">list style one</a></li>
-												<li><a href="listingvtwo.html">list style two</a></li>
-												<li><a href="listingvthree.html">list style three</a></li>
-												<li><a href="listingvfour.html">list style four</a></li>
-												<li><a href="listingvfive.html">list style five</a></li>
-												<li><a href="listingvsix.html">list style six</a></li>
-											</ul>
 											<div class="tg-sliderarea">
-												<h2>Popular Tours</h2>
+												<h2>Popüler Turlar</h2>
 												<div class="tg-trendingtripsslider tg-trendingtrips owl-carousel">
 													<div class="item tg-trendingtrip">
 														<figure>
@@ -373,8 +360,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children current-menu-item">
-										<a href="javascript:void(0);">pages</a>
+									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -383,7 +369,7 @@
 											<li><a href="billingdetail.html">Billing Detail</a></li>
 											<li><a href="404error.html">404 Error</a></li>
 											<li><a href="comingsoon.html">Coming Soon</a></li>
-											<li class="current-menu-item"><a href="cart.html">cart</a></li>
+											<li><a href="cart.html">cart</a></li>
 											<li class="menu-item-has-children">
 												<a href="javascript:void(0);">Tours</a>
 												<ul class="sub-menu">
@@ -394,8 +380,8 @@
 											</li>
 										</ul>
 									</li>
-									<li><a href="shop.html">Shop</a></li>
-									<li><a href="blog.html">Blog</a></li>
+									<li><a href="shop">Alışveriş</a></li>
+									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>
 							</div>
 						</nav>
@@ -446,47 +432,106 @@
                                             <th scope="col">&nbsp;</th>
                                         </tr>
                                         <tbody>
-                                            @foreach ($cartItems as $cartItem)
-                                                <tr>
-                                                    <td data-title="tour name">
-                                                        <div class="tg-tourname">
-                                                            <figure>
-                                                                <a href="javascript:void(0);">
-                                                                    <img src="{{ asset('images/products/'.$cartItem->product->image) }}" alt="image destinations">
-                                                                </a>
-                                                            </figure>
-                                                            <div class="tg-populartourcontent">
-                                                                <div class="tg-populartourtitle">
-                                                                    <h3><a href="javascript:void(0);">{{ $cartItem->product->name }}</a></h3>
-                                                                </div>
-                                                                <span>{{ $cartItem->quantity }} x ${{ $cartItem->product->price }}</span>
+                                            @foreach($cartItems as $item)
+                                            <tr>
+                                                <td data-title="tour name">
+                                                    <div class="tg-tourname">
+                                                        <figure>
+                                                            <a href="javascript:void(0);">
+                                                                @if($item->detay)
+                                                                    <img src="{{ asset('uploads/' . $item->detay->image) }}" alt="image destinations">
+
+                                                                @elseif($item->shop)
+                                                                    <img src="{{ asset('uploads/' . $item->shop->image) }}" alt="image destinations">
+
+                                                                @endif
+                                                            </a>
+                                                        </figure>
+                                                        <div class="tg-populartourcontent">
+                                                            <div class="tg-populartourtitle">
+                                                                <h3><a href="javascript:void(0);">
+                                                                    @if($item->detay)
+                                                                        {{ $item->detay->tur_name }}
+                                                                    @elseif($item->shop)
+                                                                        {{ $item->shop->urun_adi }}
+                                                                    @endif
+                                                                </a></h3>
                                                             </div>
+                                                            <span>{{ $item->quantity }} x
+                                                                @if($item->detay)
+                                                                    {{ $item->detay->indirimli_fiyat }} TL
+                                                                @elseif($item->shop)
+                                                                    {{ $item->shop->urun_indirim }} TL
+                                                                @endif
+                                                            </span>
                                                         </div>
-                                                    </td>
-                                                    <td data-title="quantity">
-                                                        <input type="number" name="number" class="form-control" value="{{ $cartItem->quantity }}">
-                                                    </td>
-                                                    <td data-title="price"><span>${{ $cartItem->quantity * $cartItem->product->price }}</span></td>
-                                                    <td data-title="action">
-                                                        <form action="{{ url('cart.remove', $cartItem->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger"><i class="icon-trash-can"></i></button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                </td>
+                                                <td data-title="quantity">
+                                                    <input type="number" name="quantity[{{ $item->product_name }}]" class="form-control" value="{{ $item->quantity }}" min="1">
+                                                </td>
+                                                <td data-title="price"><span>
+                                                    @if($item->detay)
+                                                        {{ $item->detay->indirimli_fiyat * $item->quantity }} TL
+                                                    @elseif($item->shop)
+                                                        {{ $item->shop->urun_indirim * $item->quantity }} TL
+                                                    @endif
+                                                </span></td>
+                                                <td data-title="action">
+                                                    <form action="{{ route('cart.remove') }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="product_name" value="{{ $item->product_name }}">
+                                                        <button type="submit" class="btn btn-link"><i class="icon-trash-can"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <!-- Sepet özetini ekleyebilirsiniz -->
-                            <!-- Ödeme vb. adımlar -->
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right">
+                                <aside id="tg-sidebar" class="tg-sidebar tg-haslayout">
+                                    <div class="tg-widget tg-widgetpersonprice">
+                                        <div class="tg-widgetcontent">
+                                            <ul>
+                                                <li class="tg-personprice">
+                                                    <div class="tg-perperson">
+                                                        <span>Toplam Fiyat</span>
+                                                        <em>
+                                                            @php
+                                                                $totalPrice = 0; // Toplam fiyatı başlat
+                                                                foreach ($cartItems as $item) {
+                                                                    if ($item->detay) {
+                                                                        // Fiyatı string'den float'a dönüştür
+                                                                        $price = floatval(str_replace(',', '.', str_replace('.', '', $item->detay->indirimli_fiyat)));
+                                                                        $totalPrice += $price * $item->quantity;
+                                                                    } elseif ($item->shop) {
+                                                                        // Fiyatı string'den float'a dönüştür
+                                                                        $price = floatval(str_replace(',', '.', str_replace('.', '', $item->shop->urun_fiyat)));
+                                                                        $totalPrice += $price * $item->quantity;
+                                                                    }
+                                                                }
+                                                                echo number_format($totalPrice, 2, ',', '.') . ' TL'; // Sonucu formatla
+                                                            @endphp
+                                                        </em>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a href="" class="tg-btn tg-btn-lg">Ödeme Yap</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </main>
+
 		<!--************************************
 				Main End
 		*************************************-->

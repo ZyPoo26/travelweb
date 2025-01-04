@@ -35,4 +35,6 @@ Route::group([
 
     $router->resource('carts', cartKontrol::class);
 
+    $router->resource('cart1s', cart1Kontrol::class);
+
 });

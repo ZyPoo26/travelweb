@@ -207,8 +207,10 @@
 							<nav class="tg-cartsearch">
 								<ul>
 									<li>
-										<a href="javascript:void(0);"><img src="/images/icons/icon-03.png" alt="image destinations"></a>
-										<div class="tg-cartitems">
+										<a href="{{ url('cart') }}">
+                                            <img src="images/icons/icon-03.png" alt="Sepet">
+                                         </a>
+										{{-- <div class="tg-cartitems">
 											<div class="tg-cartlistitems">
 												<h3>Alışveriş Sepeti</h3>
 												<div class="tg-cartitem">
@@ -239,7 +241,7 @@
 											<div class="tg-btnarea">
 												<a class="tg-btn" href="#"><span>Kart İle Öde</span></a>
 											</div>
-										</div>
+										</div> --}}
 									</li>
 									<li><a href="#tg-search"><img src="/images/icons/icon-04.png" alt="image destinations"></a></li>
 								</ul>
@@ -441,10 +443,14 @@
 									<div class="tg-description">
 										<p>{{$det->aciklama}}</p>
 									</div>
-                                    <a class="tg-btnaddtocart" href="javascript:void(0);">
-                                        <i class="icon-icons240"></i>
-                                        <span>Sepete Ekle</span>
-                                    </a>
+                                    <form action="{{ url('cart.add') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="product_name" value="{{ $det->tur_name }}">
+                                        <button type="submit" class="tg-btnaddtocart">
+                                            <i class="icon-icons240"></i>
+                                            <span>Sepete Ekle</span>
+                                        </button>
+                                    </form>
 									{{-- <form class="tg-formtheme tg-formbookingdetail">
 										<fieldset>
 											<div class="form-group">

@@ -380,15 +380,21 @@
 														<em>(3 Review)</em>
 													</div> --}}
 													<div class="tg-pricearea">
-														<del>{{$sp->urun_fiyat}}</del>
-														<h4>{{$sp->urun_indirim}}</h4>
+														<del>{{$sp->urun_fiyat}}TL</del>
+														<h4>{{$sp->urun_indirim}}TL</h4>
 													</div>
 												</div>
 											</div>
-											<a class="tg-btnaddtocart" href="javascript:void(0);">
-												<i class="icon-icons240"></i>
-												<span>Sepete Ekle</span>
-											</a>
+											<form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                                                @csrf
+
+                                                <input type="hidden" name="product_name" value="{{ $sp->urun_adi }}"> <!-- Ürün adı -->
+                                                <button type="submit" class="tg-btnaddtocart">
+                                                    <i class="icon-icons240"></i>
+                                                    <span>Sepete Ekle</span>
+                                                </button>
+                                            </form>
+
 										</div>
 									</div>
                                     @endforeach

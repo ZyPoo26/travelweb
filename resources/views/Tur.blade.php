@@ -85,7 +85,11 @@
 							<nav class="tg-cartsearch">
 								<ul>
 									<li>
-										<a href="cart"><img src="images/icons/icon-03.png" alt="image destinations"></a>
+                                         <a href="{{ url('cart') }}">
+                                            <img src="images/icons/icon-03.png" alt="Sepet">
+                                         </a>
+
+
 										{{-- <div class="tg-cartitems">
 											<div class="tg-cartlistitems">
 												<h3>Alışveriş Sepeti</h3>
