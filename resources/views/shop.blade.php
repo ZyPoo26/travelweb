@@ -136,7 +136,7 @@
 					</div>
 				</div>
 			</li>
-			<li><a href="javascript:void(0);">Pages</a>
+			{{-- <li><a href="javascript:void(0);">Pages</a>
 				<ul>
 					<li><a href="faqs.html">FAQ’s</a></li>
 					<li><a href="packages.html">Table</a></li>
@@ -155,7 +155,7 @@
 						</ul>
 					</li>
 				</ul>
-			</li>
+			</li> --}}
 			<li><a href="javascript:void(0);">Shop</a>
 				<ul>
 					<li><a href="shop.html">Shop</a></li>
@@ -295,7 +295,7 @@
 									<li class="menu-item-has-children"><a href="tur">Anasayfa</a></li>
 									<li><a href="iller">İller</a></li>
 									<li class="menu-item-has-children menu-item-has-mega-menu"><a href="liste">Listeler</a></li>
-									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -314,7 +314,7 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
+									</li> --}}
 									<li class="current-menu-item"><a href="shop">Alışveriş</a></li>
 									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>

@@ -4301,32 +4301,36 @@ blockquote{
 	resize:none;
 	height:244px;
 }
-.tg-gallery{
-	width:100%;
-	float:left;
+.tg-gallery {
+    width: 100%;
+    float: left;
+    margin: 0;
 }
-.tg-gallery ul{
-	width:auto;
-	float:none;
-	clear:both;
-	overflow:hidden;
-	margin:0 -20px;
+
+.tg-gallery ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 sütun */
+    gap: 20px; /* Aralıklar */
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }
-.tg-gallery ul li{
-	float:left;
-	width:33.33%;
-	padding:20px;
-	list-style-type:none;
+
+.tg-gallery ul li {
+    width: 100%;
+    list-style-type: none;
 }
-.tg-gallery ul li figure{
-	margin:0;
-	width:100%;
-	float:left;
+
+.tg-gallery ul li figure {
+    margin: 0;
+    overflow: hidden; /* Resmin taşmasını engeller */
 }
-.tg-gallery ul li figure img{
-	width:100%;
-	height:auto;
-	display:block;
+
+.tg-gallery ul li figure img {
+    width: 100%;
+    height: 200px;  /* Sabit yükseklik veriyoruz, ihtiyaca göre değiştirilebilir */
+    object-fit: cover; /* Resmin kesilmesini ve kutuya düzgün oturmasını sağlar */
+    display: block;
 }
 .tg-bookingtabs .tg-locationtab:before,
 .tg-bookingtabs .tg-reviewtab:before,

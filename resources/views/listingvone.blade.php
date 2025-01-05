@@ -207,8 +207,10 @@
 							<nav class="tg-cartsearch">
 								<ul>
 									<li>
-										<a href="javascript:void(0);"><img src="images/icons/icon-03.png" alt="image destinations"></a>
-										<div class="tg-cartitems">
+										<a href="{{ url('cart') }}">
+                                            <img src="images/icons/icon-03.png" alt="Sepet">
+                                         </a>
+                                         {{-- <div class="tg-cartitems">
 											<div class="tg-cartlistitems">
 												<h3>Alışveriş Sepeti</h3>
 												<div class="tg-cartitem">
@@ -239,7 +241,7 @@
 											<div class="tg-btnarea">
 												<a class="tg-btn" href="#"><span>Kart İle Öde</span></a>
 											</div>
-										</div>
+										</div> --}}
 									</li>
 									<li><a href="#tg-search"><img src="images/icons/icon-04.png" alt="image destinations"></a></li>
 								</ul>
@@ -375,7 +377,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -394,7 +396,7 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
+									</li> --}}
 									<li><a href="shop">Alışveriş</a></li>
 									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>
@@ -471,10 +473,10 @@
 												</div>
 
 											</div>
-                                            <a class="tg-btnaddtocart" href="javascript:void(0);">
+                                            {{-- <a class="tg-btnaddtocart" href="javascript:void(0);">
 												<i class="icon-icons240"></i>
 												<span>Sepete Ekle</span>
-											</a>
+											</a> --}}
 										</div>
 									</div>
                                     @endforeach

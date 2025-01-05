@@ -136,7 +136,7 @@
 					</div>
 				</div>
 			</li>
-			<li><a href="javascript:void(0);">Pages</a>
+			{{-- <li><a href="javascript:void(0);">Pages</a>
 				<ul>
 					<li><a href="faqs.html">FAQ’s</a></li>
 					<li><a href="packages.html">Table</a></li>
@@ -154,7 +154,7 @@
 						</ul>
 					</li>
 				</ul>
-			</li>
+			</li> --}}
 			<li><a href="shop.html">Shop</a></li>
 			<li><a href="blog.html">Blog</a></li>
 		</ul>
@@ -360,7 +360,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -379,7 +379,7 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
+									</li> --}}
 									<li><a href="shop">Alışveriş</a></li>
 									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>
@@ -439,11 +439,9 @@
                                                         <figure>
                                                             <a href="javascript:void(0);">
                                                                 @if($item->detay)
-                                                                    <img src="{{ asset('uploads/' . $item->detay->image) }}" alt="image destinations">
-
+                                                                    <img src="{{ asset('uploads/' . $item->detay->image) }}" alt="image destinations" style="width: 150px; height: 150px; object-fit: cover;">
                                                                 @elseif($item->shop)
-                                                                    <img src="{{ asset('uploads/' . $item->shop->image) }}" alt="image destinations">
-
+                                                                    <img src="{{ asset('uploads/' . $item->shop->image) }}" alt="image destinations" style="width: 150px; height: 150px; object-fit: cover;">
                                                                 @endif
                                                             </a>
                                                         </figure>
@@ -468,21 +466,30 @@
                                                     </div>
                                                 </td>
                                                 <td data-title="quantity">
-                                                    <input type="number" name="quantity[{{ $item->product_name }}]" class="form-control" value="{{ $item->quantity }}" min="1">
+                                                    <input type="number" name="quantity[{{ $item->product_name }}]" class="form-control quantity-input" value="{{ $item->quantity }}" min="1">
                                                 </td>
-                                                <td data-title="price"><span>
-                                                    @if($item->detay)
-                                                        {{ $item->detay->indirimli_fiyat * $item->quantity }} TL
-                                                    @elseif($item->shop)
-                                                        {{ $item->shop->urun_indirim * $item->quantity }} TL
-                                                    @endif
-                                                </span></td>
+                                                <td data-title="price">
+                                                    <span class="total-price">
+                                                        @php
+                                                            if ($item->detay) {
+                                                                $price = str_replace(',', '.', str_replace('.', '', $item->detay->indirimli_fiyat));
+                                                            } elseif ($item->shop) {
+                                                                $price = str_replace(',', '.', str_replace('.', '', $item->shop->urun_fiyat));
+                                                            } else {
+                                                                $price = 0;
+                                                            }
+
+                                                            echo $price * $item->quantity . ' TL'; // Fiyatı olduğu gibi göster
+                                                        @endphp
+                                                    </span>
+                                                </td>
                                                 <td data-title="action">
-                                                    <form action="{{ route('cart.remove') }}" method="POST" style="display:inline;">
+                                                    <form action="{{ url('cart.remove', ['product_name' => $item->product_name]) }}" method="POST" style="display:inline;" class="remove-item-form">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <input type="hidden" name="product_name" value="{{ $item->product_name }}">
-                                                        <button type="submit" class="btn btn-link"><i class="icon-trash-can"></i></button>
+                                                        <button type="submit" class="btn btn-link remove-item-btn" data-product-name="{{ $item->product_name }}">
+                                                            <i class="icon-trash-can"></i>
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -532,6 +539,28 @@
             </div>
         </main>
 
+        <script>
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Formu gönderme işlemi durdurulacak
+
+                    let productName = this.getAttribute('data-product-name');
+                    let quantityInput = this.closest('tr').querySelector('input[name="quantity[' + productName + ']"]');
+                    let quantity = parseInt(quantityInput.value);
+
+                    if (quantity > 1) {
+                        // Eğer miktar 1'den fazla ise, 1 azalt
+                        quantityInput.value = quantity - 1;
+                        this.closest('form').submit(); // Formu tekrar gönder
+                    } else {
+                        // Eğer miktar 1 ise, ürün tamamen silinsin
+                        this.closest('form').submit(); // Silme işlemi
+                    }
+                });
+            });
+        </script>
+
+
 		<!--************************************
 				Main End
 		*************************************-->
@@ -545,14 +574,14 @@
 						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 							<div class="tg-footercolumn tg-widget tg-widgettext">
 								<div class="tg-widgettitle">
-									<h3>About Travlu</h3>
+									<h3>Hakkımızda</h3>
 								</div>
 								<div class="tg-widgetcontent">
 									<div class="tg-description">
-										<p>Nunc cursus liero purs ac cogue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque</p>
+										<p>Sıradan turlar değil, tamamen size özel deneyimler sunuyoruz.</p>
 									</div>
-									<span>1-800-321-6543</span>
-									<a href="mailto:info@travlu.com">info@travlu.com</a>
+									<span>506 175 08 38</span>
+									<a href="mailto:info@travlu.com">info@NesliTurizm.com</a>
 									<ul class="tg-socialicons tg-socialiconsvtwo">
 										<li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
 										<li><a href="javascript:void(0);"><i class="icon-instagram-social-outlined-logo"></i></a></li>
@@ -561,53 +590,19 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-							<div class="tg-footercolumn tg-widget tg-widgettravelunews">
-								<div class="tg-widgettitle">
-									<h3>Travelu News</h3>
-								</div>
-								<div class="tg-widgetcontent">
-									<ul>
-										<li>
-											<figure>
-												<a href="javascript:void(0);"><img src="images/thumbnail/img-01.jpg" alt="image destinations"></a>
-											</figure>
-											<div class="tg-newcontent">
-												<h4><a href="javascript:void(0);">Bungee Jumping Trip</a></h4>
-												<div class="tg-description">
-													<p>Nunc cursus libero purus congue arcu vitae pulvinar</p>
-												</div>
-												<time datetime="2017-06-06">Feb 22, 2017</time>
-											</div>
-										</li>
-										<li>
-											<figure>
-												<a href="javascript:void(0);"><img src="images/thumbnail/img-02.jpg" alt="image destinations"></a>
-											</figure>
-											<div class="tg-newcontent">
-												<h4><a href="javascript:void(0);">Trip to White Castle</a></h4>
-												<div class="tg-description">
-													<p>Nunc cursus libero purus congue arcu vitae pulvinar</p>
-												</div>
-												<time datetime="2017-06-06">Feb 22, 2017</time>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+
 						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 							<div class="tg-footercolumn tg-widget tg-widgetdestinations">
 								<div class="tg-widgettitle">
-									<h3>Top Destinations</h3>
+									<h3>En Güzel Yerler</h3>
 								</div>
 								<div class="tg-widgetcontent">
 									<ul>
-										<li><a href="javascript:void(0);">Bayonne, Melbourne</a></li>
-										<li><a href="javascript:void(0);">Greenville, New Jersey</a></li>
-										<li><a href="javascript:void(0);">The Heights, London</a></li>
-										<li><a href="javascript:void(0);">West Side, New York</a></li>
-										<li><a href="javascript:void(0);">Upper East Side, New York</a></li>
+										<li><a href="javascript:void(0);">Eskişehir, Sazova parkı</a></li>
+										<li><a href="javascript:void(0);">Muğla, Ölüdeniz</a></li>
+										<li><a href="javascript:void(0);">Denizli, Pamukkale</a></li>
+										<li><a href="javascript:void(0);">İstanbul, Kız Kulesi</a></li>
+										<li><a href="javascript:void(0);">Bursa, Uludağ</a></li>
 									</ul>
 								</div>
 							</div>
@@ -615,17 +610,17 @@
 						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 							<div class="tg-footercolumn tg-widget tg-widgetnewsletter">
 								<div class="tg-widgettitle">
-									<h3>Newsletter</h3>
+									<h3>Haberler</h3>
 								</div>
 								<div class="tg-widgetcontent">
-									<div class="tg-description"><p>Sign up for our mailing list to get latest updates and offers</p></div>
+									<div class="tg-description"><p>Yeni Haberler İçin Mail Adresinizi Bize Yazın Bildirimlerinize Ulaşın...</p></div>
 									<form class="tg-formtheme tg-formnewsletter">
 										<fieldset>
-											<input type="email" name="email" class="form-control" placeholder="Your Email">
+											<input type="email" name="email" class="form-control" placeholder="Email Girebilirsiniz!..">
 											<button type="submit"><img src="images/icons/icon-08.png" alt="image destinations"></button>
 										</fieldset>
 									</form>
-									<span>We respect your privacy</span>
+									<span>Gizliliğer Saygılıyız..</span>
 								</div>
 							</div>
 						</div>
@@ -636,7 +631,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<p>Copyright &copy; 2017 Travlu. All  rights reserved</p>
+							<p>Copyright &copy; 2024 Nesli Turizm. All  rights reserved</p>
 						</div>
 					</div>
 				</div>

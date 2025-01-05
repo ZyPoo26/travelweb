@@ -188,28 +188,32 @@
 							<ul>
 								<li>
 									<i><img src="images/icons/icon-01.png" alt="image destinations"></i>
-									<span>1-800-321-6543</span>
+									<span>506 175 08 38</span>
 								</li>
 								<li>
 									<i><img src="images/icons/icon-02.png" alt="image destinations"></i>
-									<span>CHOOSE YOUR EXPERIENCE <a href="javascript:void(0);">Discover more</a></span>
+									<span>Senin Seçeneklerinin <a href="liste">Daha Fazlasını Keşfet</a></span>
 								</li>
 							</ul>
 						</nav>
 						<div class="tg-addnavcartsearch">
 							<nav class="tg-addnav">
 								<ul>
-									<li><a href="javascript:void(0);">about</a></li>
-									<li><a href="javascript:void(0);">contact</a></li>
+									<li><a href="aboutus.html">Hakkımızda</a></li>
+									<li><a href="contactus.html">İletişime Geç</a></li>
 								</ul>
 							</nav>
 							<nav class="tg-cartsearch">
 								<ul>
 									<li>
-										<a href="javascript:void(0);"><img src="images/icons/icon-03.png" alt="image destinations"></a>
-										<div class="tg-cartitems">
+                                         <a href="{{ url('cart') }}">
+                                            <img src="images/icons/icon-03.png" alt="Sepet">
+                                         </a>
+
+
+										{{-- <div class="tg-cartitems">
 											<div class="tg-cartlistitems">
-												<h3>Shopping Cart</h3>
+												<h3>Alışveriş Sepeti</h3>
 												<div class="tg-cartitem">
 													<figure class="tg-itemimg"><img src="images/products/img-11.jpg" alt="image description"></figure>
 													<div class="tg-contentbox">
@@ -231,14 +235,14 @@
 													</div>
 												</div>
 												<div class="tg-subtotal">
-													<h2>Subtotal</h2>
+													<h2>Toplam</h2>
 													<span>$830</span>
 												</div>
 											</div>
 											<div class="tg-btnarea">
-												<a class="tg-btn" href="#"><span>view cart</span></a>
+												<a class="tg-btn" href="#"><span>Kart İle Öde</span></a>
 											</div>
-										</div>
+										</div> --}}
 									</li>
 									<li><a href="#tg-search"><img src="images/icons/icon-04.png" alt="image destinations"></a></li>
 								</ul>
@@ -246,7 +250,7 @@
 						</div>
 					</div>
 					<div class="tg-navigationarea tg-headerfixed">
-						<strong class="tg-logo"><a href="index.html"><img src="images/logo.png" alt="company logo here"></a></strong>
+						<strong class="tg-logo"><a href="tur"><img src="images/logo.png" alt="company logo here"></a></strong>
 						<div class="tg-socialsignin">
 							<ul class="tg-socialicons">
 								<li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
@@ -254,19 +258,30 @@
 								<li><a href="javascript:void(0);"><i class="icon-twitter-social-outlined-logo"></i></a></li>
 							</ul>
 							<div class="tg-userbox">
-								<a id="tg-btnsignin" class="tg-btn" href="#tg-loginsingup"><span>sign in</span></a>
-								<div class="dropdown tg-dropdown">
+                                @if(session('user_id'))
+                                @php
+                                $user = \App\Models\Mainuser::with('profile')->find(session('user_id'));
+                                 @endphp
+                                <div class="dropdown tg-dropdown">
 									<button class="tg-btndropdown" id="tg-dropdowndashboard" type="button" data-toggle="dropdown">
-										<img src="images/author/img-01.jpg" alt="image description">
-										<span>john smith</span>
+										<img src="/images/author/img-01.jpg" alt="image description">
+										<span>{{ $user->profile->name ?? 'Profil İsmi Yok' }}</span>
 										<i class="fa fa-caret-down"></i>
 									</button>
 									<ul class="dropdown-menu tg-dropdownusermenu" aria-labelledby="tg-dropdowndashboard">
-										<li class="current-menu-item"><a href="dashboard.html">Dashboard</a></li>
-										<li><a href="dashboard.html">Edit Profile</a></li>
-										<li><a href="javascript:void(0);">Sign Out</a></li>
+										<li><a href="dashboard">Dashboard</a></li>
+										<li><a href="myprofil">Edit Profile</a></li>
+										<form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign Out</a>
+                                        </li>
 									</ul>
 								</div>
+                                @else
+                                <a id="tg-btnsignin" class="tg-btn" href="#tg-loginsingup"><span>Giriş Yap</span></a>
+                                @endif
 							</div>
 						</div>
 						<nav id="tg-nav" class="tg-nav">
@@ -280,30 +295,13 @@
 							</div>
 							<div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
 								<ul>
-									<li class="menu-item-has-children">
-										<a href="javascript:void(0);">Home</a>
-										<ul class="sub-menu">
-											<li><a href="index.html">Home ~ Modern</a></li>
-											<li><a href="indexv2.html">Home ~ Full Screen</a></li>
-											<li><a href="indexv3.html">Home ~ Creative</a></li>
-											<li><a href="indexv4.html">Home ~ Simple</a></li>
-											<li><a href="indexv5.html">Home ~ Video</a></li>
-										</ul>
+									<li><a href="tur">Anasayfa</a>
 									</li>
-									<li><a href="destinations.html">destinations</a></li>
-									<li class="menu-item-has-children menu-item-has-mega-menu">
-										<a href="javascript:void(0);">listings</a>
+									<li><a href="iller">İller</a></li>
+									<li><a href="liste">Listeler</a>
 										<div class="mega-menu">
-											<ul>
-												<li><a href="listingvone.html">list style one</a></li>
-												<li><a href="listingvtwo.html">list style two</a></li>
-												<li><a href="listingvthree.html">list style three</a></li>
-												<li><a href="listingvfour.html">list style four</a></li>
-												<li><a href="listingvfive.html">list style five</a></li>
-												<li><a href="listingvsix.html">list style six</a></li>
-											</ul>
 											<div class="tg-sliderarea">
-												<h2>Popular Tours</h2>
+												<h2>Popüler Turlar</h2>
 												<div class="tg-trendingtripsslider tg-trendingtrips owl-carousel">
 													<div class="item tg-trendingtrip">
 														<figure>
@@ -373,8 +371,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children">
-										<a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -393,22 +390,9 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
-									<li class="menu-item-has-children">
-										<a href="javascript:void(0);">shop</a>
-										<ul class="sub-menu">
-											<li><a href="shop.html">Shop</a></li>
-											<li><a href="shopdetail.html">Shop Detail</a></li>
-											<li><a href="cart.html">Cart</a></li>
-										</ul>
-									</li>
-									<li class="menu-item-has-children">
-										<a href="javascript:void(0);">blog</a>
-										<ul class="sub-menu">
-											<li><a href="blog.html">Blog</a></li>
-											<li><a href="blogdetail.html">Blog Detail</a></li>
-										</ul>
-									</li>
+									</li> --}}
+									<li><a href="shop">Alışveriş</a></li>
+									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>
 							</div>
 						</nav>

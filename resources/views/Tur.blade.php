@@ -250,7 +250,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -269,7 +269,7 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
+									</li> --}}
 									<li><a href="shop">Alışveriş</a></li>
 									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>

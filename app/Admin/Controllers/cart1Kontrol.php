@@ -125,30 +125,38 @@ public function cart1kontrol(Request $request)
         return redirect()->back()->with('error', 'Bir hata oluştu: ' . $e->getMessage());
     }
 }
-public function removeFromCart(Request $request)
+public function removeItem(Request $request, $productName)
 {
     // Kullanıcı ID'sini session'dan al
     $userId = session('user_id');
 
     if (!$userId) {
-        return response()->json(['error' => 'Lütfen giriş yapın.']);
+        return redirect()->back()->with('error', 'Lütfen giriş yapın.');
     }
-
-    // Ürün adını al
-    $productName = $request->input('product_name'); // Ürün adı
 
     // Sepette ürünü bul
     $cartItem = Cart1::where('user_id', $userId)
-                    ->where('product_name', $productName) // Ürün adı ile kontrol
+                    ->where('product_name', $productName)
                     ->first();
 
     if ($cartItem) {
-        $cartItem->delete(); // Ürünü kaldır
-        return response()->json(['success' => 'Ürün sepetten çıkarıldı!']);
+        // Ürünün miktarını 1 azalt
+        $cartItem->quantity--;
+
+        // Miktar 0'a düştüyse, ürünü sepetten tamamen sil
+        if ($cartItem->quantity <= 0) {
+            $cartItem->delete();
+        } else {
+            $cartItem->save();
+        }
+
+        return redirect()->route('cart'); // Sepet sayfasına yönlendir
     }
 
-    return response()->json(['error' => 'Ürün bulunamadı.']);
+    return redirect()->route('cart')->with('error', 'Ürün bulunamadı.');
 }
+
+
 
 
     /**

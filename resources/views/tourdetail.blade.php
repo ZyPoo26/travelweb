@@ -24,6 +24,10 @@
 	<link rel="stylesheet" href="/css/color.css">
 	<link rel="stylesheet" href="/css/responsive.css">
 	<script src="/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6tUYUxQ2dxnIXAvv3rGG-rAIWjY7BpOU&callback=initMaps&libraries=places">
+</script>
+
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -370,7 +374,7 @@
 											</div>
 										</div>
 									</li>
-									<li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
+									{{-- <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
 										<ul class="sub-menu">
 											<li><a href="faqs.html">FAQ’s</a></li>
 											<li><a href="packages.html">Table</a></li>
@@ -389,7 +393,7 @@
 												</ul>
 											</li>
 										</ul>
-									</li>
+									</li> --}}
 									<li><a href="/shop">Alışveriş</a></li>
 									{{-- <li><a href="blog.html">blog</a></li> --}}
 								</ul>
@@ -436,9 +440,9 @@
 										<em>(3 Review)</em>
 									</div> --}}
 									<div class="tg-pricearea">
-										<span>From</span>
-										<del>{{$det->fiyat}}</del>
-										<h4>{{$det->indirimli_fiyat}}<sub>/ Kişi Başı</sub></h4>
+
+										{{-- <del>{{$det->fiyat}} </del> --}}
+										<h4>{{$det->indirimli_fiyat}} TL<sub>/ Kişi Başı</sub></h4>
 									</div>
 									<div class="tg-description">
 										<p>{{$det->aciklama}}</p>
@@ -528,10 +532,12 @@
 												</a>
 											</li> --}}
 											<li role="presentation">
-												<a href="#italy" aria-controls="italy" role="tab" data-toggle="tab">
+												<a href="#location-<?php echo $det->yer; ?>" aria-controls="location-<?php echo $det->yer; ?>" role="tab" data-toggle="tab">
 													<span>Konum</span>
 												</a>
+
 											</li>
+
 											{{-- <li role="presentation">
 												<a href="#london" aria-controls="london" role="tab" data-toggle="tab">
 													<span>Reviews</span>
@@ -673,16 +679,16 @@
 													</div>
 												</div>
 											</div>
-											<div role="tabpanel" class="tab-pane tg-locationtab" id="italy">
-												<div class="tg-box tg-location">
-													<h3>The neighborhood</h3>
-													<div class="tg-description">
-														<p>Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis
-euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-													</div>
-													<div id="tg-locationmap" class="tg-locationmap tg-map"></div>
-												</div>
-											</div>
+											<div role="tabpanel" class="tab-pane tg-locationtab" id="location-<?php echo $det->yer; ?>">
+                                                <div class="tg-box tg-location">
+                                                    <h3>{{$det->yer}}</h3>
+                                                    {{-- <div class="tg-description">
+                                                        <p>Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div> --}}
+                                                    <!-- İl için dinamik id ile harita bölgesi -->
+                                                    <div id="map-<?php echo $det->yer; ?>" class="tg-locationmap tg-map" data-city-name="<?php echo $det->yer; ?>"></div>
+                                                </div>
+                                            </div>
 											<div role="tabpanel" class="tab-pane tg-reviewtab" id="london">
 												<div class="tg-reviewsarea">
 													<form class="tg-formtheme tg-formreviews">
@@ -848,71 +854,33 @@ euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 											</div>
 											<div role="tabpanel" class="tab-pane tg-gallerytab" id="india">
 												<div class="tg-gallery">
-													<ul>
-														<li>
-															<figure>
-																<a href="images/gallery/img-01.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-01.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-02.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-02.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-03.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-03.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-04.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-04.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-05.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-05.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-06.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-06.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-07.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-07.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-08.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-08.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-														<li>
-															<figure>
-																<a href="images/gallery/img-09.jpg" data-rel="prettyPhoto[instagram]">
-																	<img src="images/gallery/img-09.jpg" alt="image decruoton">
-																</a>
-															</figure>
-														</li>
-													</ul>
+													<ul id="gallery-list-{{$det->yer}}">
+                                                        <?php
+                                                            // Unsplash API URL
+                                                            $access_key = "KW5_ZcDvrOFyrdj3h7-2E-UtVThWGZfELNy0YKFDovo";  // Unsplash API Key'inizi buraya yazın
+                                                            $city = $det->yer; // Şehir adı (örneğin, "Eskisehir")
+
+                                                            // Unsplash API'den resimleri çekmek için URL
+                                                            $unsplash_url = "https://api.unsplash.com/photos/random?query=" . urlencode($city) . "&client_id=" . $access_key . "&count=9";
+
+                                                            // cURL ile API'ye istek gönder
+                                                            $response = file_get_contents($unsplash_url);
+                                                            $images = json_decode($response);
+
+                                                            // Eğer resimler başarılı bir şekilde alındıysa
+                                                            if ($images) {
+                                                                foreach ($images as $image) {
+                                                                    echo '<li>';
+                                                                    echo '<figure>';
+                                                                    echo '<a href="' . $image->urls->full . '" data-rel="prettyPhoto[' . $city . ']">';
+                                                                    echo '<img src="' . $image->urls->regular . '" alt="' . $city . ' image">';
+                                                                    echo '</a>';
+                                                                    echo '</figure>';
+                                                                    echo '</li>';
+                                                                }
+                                                            }
+                                                        ?>
+                                                    </ul>
 												</div>
 											</div>
 										</div>

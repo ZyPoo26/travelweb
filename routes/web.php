@@ -74,7 +74,7 @@ Route::get('/liste',function(){
         Route::post('/logout', [mainuserKontrol::class, 'logout'])->name('logout');
         Route::post('/updateProfile', [myprofilKontrol::class, 'updateProfile'])->name('updateProfile');
         Route::post('/cart.add', [cart1Kontrol::class, 'cart1kontrol'])->name('cart.add');
-        Route::delete('/cart.remove', [cart1Kontrol::class, 'removeFromCart'])->name('cart.remove');
+        Route::delete('/cart/remove/{productName}', [cart1Kontrol::class, 'removeFromCart'])->name('cart.remove');
 
 
 
