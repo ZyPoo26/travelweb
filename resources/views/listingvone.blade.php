@@ -480,7 +480,7 @@
 										</div>
 									</div>
                                     @endforeach
-								<nav class="tg-pagination">
+								{{-- <nav class="tg-pagination">
 									<ul>
 										<li class="tg-active"><a href="liste">1</a></li>
 										<li><a href="javascript:void(0);">2</a></li>
@@ -488,7 +488,7 @@
 										<li><a href="javascript:void(0);">4</a></li>
 										<li class="tg-nextpage"><a href="javascript:void(0);"><i class="fa fa-angle-right"></i></a></li>
 									</ul>
-								</nav>
+								</nav> --}}
 							</div>
 						</div>
 					</div>

@@ -23,6 +23,9 @@
 	<link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/css/color.css">
 	<link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/prettyPhoto.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/jquery.prettyPhoto.min.js"></script>
 	<script src="/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6tUYUxQ2dxnIXAvv3rGG-rAIWjY7BpOU&callback=initMaps&libraries=places">
@@ -852,7 +855,68 @@
 													</form>
 												</div>
 											</div>
-											<div role="tabpanel" class="tab-pane tg-gallerytab" id="india">
+                                            {{-- <div role="tabpanel" class="tab-pane tg-gallerytab" id="india">
+                                                <div class="tg-gallery">
+                                                    <ul id="gallery-list-{{$det->yer}}">
+                                                        <?php
+                                                            // Pixabay API Key'inizi buraya yazın
+                                                            $api_key = "YOUR_PIXABAY_API_KEY"; // Kendi API anahtarınızı buraya ekleyin
+                                                            $city = $det->yer; // Şehir adı (örneğin, "Eskisehir")
+
+                                                            // Pixabay API'den resimleri çekmek için URL
+                                                            $pixabay_url = "https://pixabay.com/api/?key=" . $api_key . "&q=" . urlencode($city) . "&image_type=photo&per_page=9";
+
+                                                            // cURL ile API'ye istek gönder
+                                                            $ch = curl_init();
+                                                            curl_setopt($ch, CURLOPT_URL, $pixabay_url);
+                                                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                                            $response = curl_exec($ch);
+                                                            curl_close($ch);
+
+                                                            $images = json_decode($response);
+
+                                                            // Eğer resimler başarılı bir şekilde alındıysa
+                                                            if ($images && isset($images->hits)) {
+                                                                foreach ($images->hits as $image) {
+                                                                    echo '<li>';
+                                                                    echo '<figure>';
+                                                                    echo '<a href="' . $image->largeImageURL . '" data-rel="prettyPhoto[' . $city . ']">';
+                                                                    echo '<img src="' . $image->webformatURL . '" alt="' . $city . ' image">';
+                                                                    echo '</a>';
+                                                                    echo '</figure>';
+                                                                    echo '</li>';
+                                                                }
+                                                            } else {
+                                                                echo "<p>No images found for the query.</p>";
+                                                            }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <!-- PrettyPhoto ve jQuery -->
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/jquery.prettyPhoto.min.js"></script>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/prettyPhoto.min.css" />
+
+                                            <script>
+                                            $(document).ready(function() {
+                                                // data-rel özelliğini rel olarak ayarla
+                                                jQuery("a[data-rel]").each(function () {
+                                                    jQuery(this).attr("rel", jQuery(this).data("rel"));
+                                                });
+
+                                                // PrettyPhoto ayarları
+                                                jQuery("a[data-rel^='prettyPhoto']").prettyPhoto({
+                                                    animation_speed: 'normal',
+                                                    theme: 'dark_square',
+                                                    slideshow: 3000,
+                                                    autoplay_slideshow: false,
+                                                    social_tools: false
+                                                });
+                                            });
+                                            </script> --}}
+											{{-- <div role="tabpanel" class="tab-pane tg-gallerytab" id="india">
 												<div class="tg-gallery">
 													<ul id="gallery-list-{{$det->yer}}">
                                                         <?php
@@ -882,7 +946,97 @@
                                                         ?>
                                                     </ul>
 												</div>
-											</div>
+											</div> --}}
+                                            <div role="tabpanel" class="tab-pane tg-gallerytab" id="india">
+                                                <div class="tg-gallery">
+													<ul id="gallery-list-{{$det->yer}}">
+														<?php
+															// API Anahtarları
+															$unsplash_key = "KW5_ZcDvrOFyrdj3h7-2E-UtVThWGZfELNy0YKFDovo"; // Unsplash API Key
+															$pixabay_key = "48054111-9845484910f543ed104614f68";   // Pixabay API Key
+															$city = $det->yer; // Şehir adı (örneğin, "Eskisehir")
+
+															function fetch_images($url) {
+																$ch = curl_init();
+																curl_setopt($ch, CURLOPT_URL, $url);
+																curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+																$response = curl_exec($ch);
+																curl_close($ch);
+																return json_decode($response, true);
+															}
+
+															// Unsplash API'den resim çek
+															$unsplash_url = "https://api.unsplash.com/photos/random?query=" . urlencode($city) . "&client_id=" . $unsplash_key . "&count=6";
+															$unsplash_images = fetch_images($unsplash_url);
+
+															// Pixabay API'den resim çek
+															$pixabay_url = "https://pixabay.com/api/?key=" . $pixabay_key . "&q=" . urlencode($city) . "&image_type=photo&per_page=6";
+															$pixabay_images = fetch_images($pixabay_url);
+
+															// Resimleri birleştir ve benzersiz hale getir
+															$combined_images = [];
+															$used_urls = [];
+
+															// Unsplash resimleri ekle
+															if (isset($unsplash_images) && is_array($unsplash_images)) {
+																foreach ($unsplash_images as $image) {
+																	if (!in_array($image['urls']['regular'], $used_urls)) {
+																		$combined_images[] = $image['urls']['regular'];
+																		$used_urls[] = $image['urls']['regular'];
+																	}
+																}
+															}
+
+															// Pixabay resimleri ekle
+															if (isset($pixabay_images['hits']) && is_array($pixabay_images['hits'])) {
+																foreach ($pixabay_images['hits'] as $image) {
+																	if (!in_array($image['webformatURL'], $used_urls)) {
+																		$combined_images[] = $image['webformatURL'];
+																		$used_urls[] = $image['webformatURL'];
+																	}
+																}
+															}
+
+															// Eğer toplam resim sayısı 12'den az ise, eksik olanı tamamlamak için Unsplash'ten yeniden çek
+															$remaining_count = 12 - count($combined_images);
+															if ($remaining_count > 0) {
+																$additional_unsplash_url = "https://api.unsplash.com/photos/random?query=" . urlencode($city) . "&client_id=" . $unsplash_key . "&count=" . $remaining_count;
+																$additional_unsplash_images = fetch_images($additional_unsplash_url);
+
+																if (isset($additional_unsplash_images) && is_array($additional_unsplash_images)) {
+																	foreach ($additional_unsplash_images as $image) {
+																		if (!in_array($image['urls']['regular'], $used_urls)) {
+																			$combined_images[] = $image['urls']['regular'];
+																			$used_urls[] = $image['urls']['regular'];
+																		}
+																	}
+																}
+															}
+
+															// İlk 12 resmi ekrana yazdır
+															$count = 0;
+															foreach ($combined_images as $img_url) {
+																if ($count < 12) {
+																	echo '<li>';
+																	echo '<figure>';
+																	echo '<a href="' . $img_url . '" data-rel="prettyPhoto[' . $city . ']">';
+																	echo '<img src="' . $img_url . '" alt="' . $city . ' image">';
+																	echo '</a>';
+																	echo '</figure>';
+																	echo '</li>';
+																	$count++;
+																} else {
+																	break;
+																}
+															}
+
+															if ($count == 0) {
+																echo "<p>No images found for the query.</p>";
+															}
+														?>
+													</ul>
+                                                </div>
+                                            </div>
 										</div>
 									</div>
 								</div>
@@ -1191,7 +1345,7 @@
 	*************************************-->
 	<script src="/js/vendor/jquery-library.js"></script>
 	<script src="/js/vendor/bootstrap.min.js"></script>
-	<script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&language=en"></script>
+	{{-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&language=en"></script> --}}
 	<script src="/js/bootstrap-select.min.js"></script>
 	<script src="/js/jquery-scrolltofixed.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
